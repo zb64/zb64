@@ -31,4 +31,8 @@ testdev:
 bench:
 	$(GOTEST) -parallel=4 -run="none" -benchtime="2s" -benchmem -bench=.
 run: build
-	./$(BINARY) -r "Hello World"
+	./$(BINARY)
+runen: build
+	./$(BINARY) -e -r "Hello World"
+runde: build
+	./$(BINARY) -d -r "8kjNyclXCM8vykkBBAAA//8="
