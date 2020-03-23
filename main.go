@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
-	"time"
 
 	"github.com/1set/gut/ystring"
 )
@@ -31,10 +31,6 @@ func main() {
 	flag.StringVar(&rawContent, "r", EMPTY, "raw input content"+FLAG_POSTFIX)
 	flag.Parse()
 
-	fmt.Printf("m: %s\n", method)
-	fmt.Printf("f: %s\n", fileName)
-	fmt.Printf("r: %s\n", rawContent)
-
 	if method != METHOD_ENCODE && method != METHOD_DECODE {
 		fmt.Printf("invalid method: %s\n", method)
 		flag.Usage()
@@ -42,16 +38,17 @@ func main() {
 	}
 
 	if ystring.IsNotBlank(fileName) {
-		fmt.Println("read", fileName)
-	} else if ystring.IsNotBlank(rawContent) {
-		fmt.Println("got", rawContent)
-	} else {
+		if b, err := ioutil.ReadFile(fileName); err != nil {
+			fmt.Printf("fail to read file %q: %v\n", fileName, err)
+			os.Exit(3)
+		} else {
+			rawContent = string(b)
+		}
+	} else if ystring.IsBlank(rawContent) {
 		fmt.Println("got no input arguments, specify 'file' or 'raw'")
 		flag.Usage()
 		os.Exit(2)
 	}
 
-	host, _ := os.Hostname()
-	pwd, _ := os.Getwd()
-	fmt.Printf("Host: %s\nPath: %s\nTime: %s\n", host, pwd, time.Now().Format("2006-01-02T15:04:05-0700"))
+	fmt.Printf("content: {%s}\n", rawContent)
 }

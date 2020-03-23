@@ -31,4 +31,4 @@ testdev:
 bench:
 	$(GOTEST) -parallel=4 -run="none" -benchtime="2s" -benchmem -bench=.
 run: build
-	./$(BINARY)
+	./$(BINARY) -r "Hello World"
