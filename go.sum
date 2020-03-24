@@ -1,2 +1,4 @@
 github.com/1set/gut v0.0.0-20200225162230-3995492b8589 h1:JcmJsZl3jnHWyYy9wk770Ep23ArQED3XAliq/0+Ge1E=
 github.com/1set/gut v0.0.0-20200225162230-3995492b8589/go.mod h1:4NyGsj/BwOwBdc9q9F/yemaNpEm8s/D8KIYhusgaasE=
+github.com/zb64/lib v0.0.0-20200324112949-69734e469964 h1:naGywM9wjfE+6OK/EZ4XcHImY8LoP/6lch2CHI/KKVo=
+github.com/zb64/lib v0.0.0-20200324112949-69734e469964/go.mod h1:EIDlvuQ6dliIcykQmaEDb6uwd2rL5ukwPLeJ9M+1tTo=

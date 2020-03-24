@@ -7,12 +7,13 @@ import (
 	"os"
 
 	"github.com/1set/gut/ystring"
+	"github.com/zb64/lib"
 )
 
 const (
-	DISABLE     = false
-	EMPTY       = ""
-	FlagPostfix = " (shorthand)"
+	disabled    = false
+	empty       = ""
+	flagPostfix = " (shorthand)"
 )
 
 var (
@@ -24,14 +25,14 @@ var (
 )
 
 func main() {
-	flag.BoolVar(&isEncode, "encode", DISABLE, "encode the input")
-	flag.BoolVar(&isEncode, "e", DISABLE, "encode the input"+FlagPostfix)
-	flag.BoolVar(&isDecode, "decode", DISABLE, "decode the input")
-	flag.BoolVar(&isDecode, "d", DISABLE, "decode the input"+FlagPostfix)
-	flag.StringVar(&fileName, "file", EMPTY, "input file name (override 'raw')")
-	flag.StringVar(&fileName, "f", EMPTY, "input file name (override 'raw')"+FlagPostfix)
-	flag.StringVar(&rawContent, "raw", EMPTY, "raw input content")
-	flag.StringVar(&rawContent, "r", EMPTY, "raw input content"+FlagPostfix)
+	flag.BoolVar(&isEncode, "encode", disabled, "encode the input")
+	flag.BoolVar(&isEncode, "e", disabled, "encode the input"+flagPostfix)
+	flag.BoolVar(&isDecode, "decode", disabled, "decode the input")
+	flag.BoolVar(&isDecode, "d", disabled, "decode the input"+flagPostfix)
+	flag.StringVar(&fileName, "file", empty, "input file name (override 'raw')")
+	flag.StringVar(&fileName, "f", empty, "input file name (override 'raw')"+flagPostfix)
+	flag.StringVar(&rawContent, "raw", empty, "raw input content")
+	flag.StringVar(&rawContent, "r", empty, "raw input content"+flagPostfix)
 	flag.Parse()
 
 	var content string
@@ -56,14 +57,14 @@ func main() {
 		flag.Usage()
 		os.Exit(3)
 	case isEncode:
-		if encodeResult, err := base64Deflate.Encode([]byte(content)); err != nil {
+		if encodeResult, err := lib.Deflate.Encode([]byte(content)); err != nil {
 			fmt.Printf("fail to encode: %v\n", err)
 			os.Exit(4)
 		} else {
 			fmt.Print(encodeResult)
 		}
 	case isDecode:
-		if decodeResult, err := base64Deflate.Decode(content); err != nil {
+		if decodeResult, err := lib.Deflate.Decode(content); err != nil {
 			fmt.Printf("fail to decode: %v\n", err)
 			os.Exit(5)
 		} else {
