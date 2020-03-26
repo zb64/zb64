@@ -19,7 +19,6 @@ const (
 var (
 	isEncode   bool
 	isDecode   bool
-	method     string
 	fileName   string
 	rawContent string
 )
@@ -52,8 +51,8 @@ func main() {
 	}
 
 	switch {
-	case (isEncode && isDecode) || !(isEncode || isDecode):
-		fmt.Println("got no method arguments, specify '-encode' or '-decode'")
+	case !containsOneTrue(isEncode, isDecode):
+		fmt.Println("invalid method argument, specify '-encode' or '-decode'")
 		flag.Usage()
 		os.Exit(3)
 	case isEncode:
@@ -71,4 +70,14 @@ func main() {
 			fmt.Print(string(decodeResult))
 		}
 	}
+}
+
+func containsOneTrue(vals ...bool) bool {
+	count := 0
+	for _, v := range vals {
+		if v {
+			count++
+		}
+	}
+	return count == 1
 }
