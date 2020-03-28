@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/1set/gut/ystring"
 	"github.com/zb64/lib"
@@ -63,7 +64,7 @@ func main() {
 			fmt.Print(encodeResult)
 		}
 	case isDecode:
-		if decodeResult, err := lib.Deflate.Decode(content); err != nil {
+		if decodeResult, err := lib.Deflate.Decode(strings.TrimSpace(content)); err != nil {
 			fmt.Printf("fail to decode: %v\n", err)
 			os.Exit(5)
 		} else {

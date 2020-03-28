@@ -35,4 +35,4 @@ run: build
 runen: build
 	./$(BINARY) -e -r "Hello World"
 runde: build
-	./$(BINARY) -d -r "8kjNyclXCM8vykkBBAAA//8="
+	./$(BINARY) -d -r "  8kjNyclXCM8vykkBBAAA//8=	"
