@@ -15,6 +15,8 @@ doc:
 fmt:
 	$(GOFMT1) -s -w .
 	$(GOFMT2) -l -w .
+install:
+	$(GOCMD) install .
 build:
 	$(GOBUILD) -v
 buildlinux:
